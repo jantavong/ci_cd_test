@@ -73,8 +73,7 @@ jobs:
       # Deploy via SSH
       - run:
           name: Deploy via SSH
-          command: sshpass -p "${PASSWORDYII2}" ssh -v -o StrictHostKeyChecking=no ${USERNAMEYII2}@${IPYII2} 'cd /var/www/html/dev2 && git pull && echo "Deployment successful!"'
-
+          command: sshpass -p "${PASSWORDYII2}" ssh -v -o StrictHostKeyChecking=no ${USERNAMEYII2}@${IPYII2} 'cd /var/www/html/dev2 && git clone https://github.com/ballcs/yii2-basic-config && echo "<?php return ['host' => '127.0.0.1', 'username' => '${USERNAMEYII2}', 'password' => 'password2']; ?>" > /var/www/html/tests/yii2-basic-config/config/db.php && echo "Deployment successful!"'
 # Orchestrate our job run sequence
 workflows:
   version: 2
@@ -86,7 +85,7 @@ workflows:
       - deploy:
           requires:
             - test
-          context: yii2
+          context: yii2  #context คือตัวแปรที่อยู่บน circleci
           filters:
             branches:
               only: main
