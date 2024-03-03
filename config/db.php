@@ -11,4 +11,10 @@ return [
     //'enableSchemaCache' => true,
     //'schemaCacheDuration' => 60,
     //'schemaCache' => 'cache',
+
+    // 'class' => 'yii\db\Connection',
+    // 'dsn' => 'mysql:host=10.250.1.99;dbname=group2',
+    // 'username' => 'group2',
+    // 'password' => 'pdy2pkm2GBD1jnd@nek',
+    // 'charset' => 'utf8',
 ];

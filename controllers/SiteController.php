@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\SignupForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -9,6 +10,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+
 
 class SiteController extends Controller
 {
@@ -69,6 +71,18 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
+    public function actionSignupUser(){
+
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $model = new SignupForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            return ['response' => 'Ok'];
+        }else{
+            return ['response' => 'Error'];
+        }
+        
+    }
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
