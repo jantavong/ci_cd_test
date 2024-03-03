@@ -47,7 +47,14 @@ jobs:
           name: Create non-admin user and grant privileges
           command: |
             sudo mysql -u root -e "CREATE USER IF NOT EXISTS 'dev' IDENTIFIED BY 'password'; GRANT ALL PRIVILEGES ON yii2basic_test.* TO 'dev'@'%'; FLUSH PRIVILEGES;"
-
+      - run: echo "<?php return [
+                'class' => 'yii\db\Connection',
+                'dsn' => 'mysql:host=127.0.0.1;dbname=yii2basic_test',
+                'username' => 'dev',
+                'password' => 'password',
+                'charset' => 'utf8',
+            ]; ?>" > ./config/test_db.php
+            
       # Run Codeception tests
       - run: ./vendor/bin/codecept run
 
